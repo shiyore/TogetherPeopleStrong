@@ -12,8 +12,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #e7e3dc;
-                color: #354b5a;
+                background-color: #fff;
+                color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -84,7 +84,6 @@
                     Together People Strong
                 </div>
 
-            </div>
         </div>
     </body>
 </html>
