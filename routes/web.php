@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+//admin functions
+//just like in wordpress, this routes the admin to the admin login page
+Route::get('/admin', function(){return view('admin_login');});
+//Admin Login Process
+Route::post('/admin_login','AdminController@login');
+Route::post('/manageUser','AdminController@manageUser');
