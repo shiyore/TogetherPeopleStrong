@@ -1,8 +1,6 @@
-<html>
-	<head>
-		<title>Admin Login</title>
-	</head>
-	<body>
+@extends('layouts.app')
+
+	@section('content')
 		<form action="admin_login" method="post">
 			{{csrf_field()}}
 			<div class="demo-table">
@@ -30,5 +28,4 @@
 				<input type="submit" class="btnLogin">
 			</div>
 		</form>
-	</body>
-</html>
+	@endsection

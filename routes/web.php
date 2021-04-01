@@ -26,3 +26,7 @@ Route::get('/admin', function(){return view('admin_login');});
 //Admin Login Process
 Route::post('/admin_login','AdminController@login');
 Route::post('/manageUser','AdminController@manageUser');
+
+Route::get('/portfolio', function(){return view('User_Information');});
+
+Route::post('/userInfo', 'PortfolioController@update');
