@@ -25,6 +25,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', function(){return view('admin_login');});
 //Admin Login Process
 Route::post('/admin_login','AdminController@login');
+
 //Routing for job posting management
 Route::get('/admin/postings',function(){
     $service = new SecurityService();
@@ -43,3 +44,4 @@ Route::post('/manageUser','AdminController@manageUser');
 Route::get('/portfolio', function(){return view('User_Information');});
 
 Route::post('/userInfo', 'PortfolioController@update');
+
