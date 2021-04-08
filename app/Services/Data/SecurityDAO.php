@@ -1,9 +1,12 @@
 <?php
 namespace App\Services\Data;
 use App\Models\AdminModel;
+use App\Models\Posting;
 use App\Models\UserModel;
 use Carbon\Exceptions\Exception;
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 class SecurityDAO{
     
     //connection string
@@ -61,6 +64,68 @@ class SecurityDAO{
     public function deleteUser(UserModel $user){
         try{
             $query = "DELETE FROM `users` WHERE name='".$user->getUsername()."' AND password='" . $user->getPassword()."'";
+            
+            $result = mysqli_query($this->conn , $query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    //crud methods for job postings
+    public function addPosting(string $title,string $description,string $skills){
+        try{
+            $query = "INSERT INTO `postings`(`title`, `description`, `skills`) VALUES ('$title','$description','$skills')";
+            
+            $result = mysqli_query($this->conn , $query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function getPostings(){
+        try{
+            //users array
+            $postings = array();
+            
+            $query = "SELECT id, title, description, skills FROM postings";
+            
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc()) {
+                array_push($postings, new Posting($row['id'],$row['title'],$row['description'],$row['skills']));
+            }
+            return $postings;
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function getPosting(String $id){
+        try{
+            $postings = array();
+            
+            $query = "SELECT id, title, description, skills FROM postings WHERE id=$id";
+            
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc()) {
+                array_push($postings, new Posting($row['id'],$row['title'],$row['description'],$row['skills']));
+            }
+            return $postings;
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function updatePosting(Posting $posting){
+        try{
+            $title = $posting->getTitle();
+            $query = "UPDATE `postings` SET `title`='$title',`description`='".$posting->getDescription()."',`skills`='".$posting->getDesired_skills()."' WHERE `id`='".$posting->getId()."'";
+            
+            $result = mysqli_query($this->conn , $query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    public function deletePosting($id){
+        try{
+            
+            $query = "DELETE FROM `postings` WHERE id='$id'";
             
             $result = mysqli_query($this->conn , $query);
         }catch(Exception $e){
