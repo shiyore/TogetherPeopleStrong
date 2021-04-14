@@ -1,7 +1,10 @@
 @extends('layouts.app')
-<?php use App\Models\PortfolioModel?>
-<?php $portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'))?>
+<?php //use App\Models\PortfolioModel?>
+<?php //$portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'))?>
 @section('content')
+<br/>
+<br/>
+<br/>
 <h1 align="center"><?php echo $portfolio->getName()?>'s Portfolio</h1>
 <div align="center">
 	<h2><?php echo $portfolio->getPosition()?></h2>

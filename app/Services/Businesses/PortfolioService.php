@@ -23,4 +23,9 @@ class PortfolioService
         $DAO = new PortfolioDAO(new DBConnect("togetherpeoplestrong"));
         return $DAO->createPortfolio($port);
     }
+    public function getAll()
+    {
+        $DAO = new PortfolioDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->getAll();
+    }
 }

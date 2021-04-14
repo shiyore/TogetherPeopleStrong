@@ -43,6 +43,9 @@ Route::post('/manageUser','AdminController@manageUser');
 
 
 Route::get('/portfolio/create', function(){return view('User_Information');});
+Route::get('/portfolio/viewAll', 'PortfolioController@viewAll');
+Route::get('/TogetherPeopleStrong/portfolio/viewAll', 'PortfolioController@viewAll');
+Route::post('/portfolio/viewPortfolio', 'PortfolioController@viewPortfolio');
 
 Route::post('/userInfo', 'PortfolioController@update');
 

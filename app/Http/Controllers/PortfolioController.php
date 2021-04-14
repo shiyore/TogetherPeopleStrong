@@ -26,7 +26,8 @@ class PortfolioController extends Controller
             //echo '<h2> does exist</h2>';
             if ($service->updatePortfolio($portfolio))
             {
-                return view('portfolioView', $arr);
+                //return view('portfolioView', $arr);
+                return view('portfolioView')->with('portfolio', $portfolio);
             }
         }
         else 
@@ -34,9 +35,23 @@ class PortfolioController extends Controller
             //echo '<h2> does not exist</h2>';
             if ($service->createPortfolio($portfolio))
             {
-                return view('portfolioView', $arr);
+                //return view('portfolioView', $arr);
+                return view('portfolioView')->with('portfolio', $portfolio);
             }
         }
         return view('portfolio_failure');
+    }
+    
+    public function viewAll(Request $request)
+    {
+        $service = new PortfolioService();
+        $portfolioArr = $service->getAll();
+        return view('portfolioViewAll')->with('portfolios', $portfolioArr);
+        
+    }
+    public function viewPortfolio(Request $request)
+    {
+        $portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'));
+        return view('portfolioView')->with('portfolio', $portfolio);
     }
 }
