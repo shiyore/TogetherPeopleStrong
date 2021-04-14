@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class UserModel{
+class UserModel implements \Serializable{
     private $username;
     private $email;
     private $password;
@@ -55,6 +55,12 @@ class UserModel{
         $this->email = $email;
         $this->password = $password;
     }
+    public function serialize()
+    {return get_object_vars($this);}
+
+    public function unserialize($serialized)
+    {return get_object_vars($this);}
+
     
     
 }

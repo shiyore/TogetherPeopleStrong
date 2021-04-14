@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Services\Businesses\SecurityService;
 use App\Models\AdminModel;
 use App\Models\UserModel;
@@ -18,19 +20,13 @@ class AdminController extends Controller
         $service = new SecurityService();
         
         $isValid = $service->login($admin_user);
-        
         if($isValid){
+            session()->put("security","admin");
             return view('AdminPortal')->with('users', $service->getUsers());
         }else{
             return view('admin_login');
         }
-        /**
-         * //put all form values into an array
-         $formValues = $request->all();
-         //get username
-         $userName = request()->get('user_name');
-         return $request->all();
-         */
+
     }
     
     //validation for a new job posting
