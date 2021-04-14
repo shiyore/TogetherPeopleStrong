@@ -38,10 +38,4 @@
     </div>
 </body>
 @endsection
-<script>
-var btn = document.getElementById('newPost');
-btn.addEventListener('click', function() {
-  document.location.href = '/TogetherPeopleStrong/public/admin/new_posting';
-});
-</script>
 </html>
