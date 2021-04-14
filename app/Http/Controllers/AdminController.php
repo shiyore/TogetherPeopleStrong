@@ -124,4 +124,11 @@ class AdminController extends Controller
         }
     }
     
+    //returns the view to manage users
+    public function viewUsers()
+    {
+        $serv = new SecurityService();
+        return view('AdminPortal')->with('users', $serv->getUsers());
+    }
+    
 }

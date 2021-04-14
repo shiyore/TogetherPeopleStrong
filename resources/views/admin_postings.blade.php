@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+@extends('layouts.adminApp')
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -9,17 +9,8 @@
 
 </head>
 
+@section('content')
 <body>
-    <nav class="navbar navbar-dark navbar-expand-md bg-dark">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Together People Strong</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link active" href="/admin/postings">Users</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="/TogetherPeopleStrong/public/admin/postings">Job Postings</a></li>
-                </ul>
-            </div><button class="btn btn-primary" id="newPost" type="button">New Job Posting</button>
-        </div>
-    </nav>
     <div class="table-responsive">
         <table class="table">
             <thead class="text-truncate">
@@ -46,6 +37,7 @@
         </table>
     </div>
 </body>
+@endsection
 <script>
 var btn = document.getElementById('newPost');
 btn.addEventListener('click', function() {

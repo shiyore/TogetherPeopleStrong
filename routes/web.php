@@ -32,6 +32,7 @@ Route::get('/admin/postings',function(){
     $postings = $service->getPostings();
     return view('admin_postings')->with('postings',$postings);
 });
+Route::get('/admin/users', 'AdminController@viewUsers');
 Route::get('/admin/new_posting',function(){return view('new_posting');});
 Route::post('/admin/submit_new_posting','AdminController@newPosting');
 Route::post('/admin/managePosting','AdminController@changePosting');
@@ -41,7 +42,7 @@ Route::post('/admin/deleteConfirmed','AdminController@deleteConfirmation');
 Route::post('/manageUser','AdminController@manageUser');
 
 
-Route::get('/portfolio', function(){return view('User_Information');});
+Route::get('/portfolio/create', function(){return view('User_Information');});
 
 Route::post('/userInfo', 'PortfolioController@update');
 
