@@ -83,5 +83,25 @@ class PortfolioDAO
             echo $e->getMessage();
         }
     }
+    
+    public function getAll()
+    {
+        try
+        {
+            $query = "SELECT * FROM portfolios";
+            $portfolios = array();
+                
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc())
+            {
+                array_push($portfolios, new PortfolioModel($row['username'], $row['position'], $row['experience'], $row['proficiencies']));
+            }
+            return $portfolios;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
 }
 ?>
