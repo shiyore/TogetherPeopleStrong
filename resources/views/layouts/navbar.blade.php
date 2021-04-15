@@ -29,6 +29,24 @@
 					<li class="nav-item bg-tan">
 						<a class="nav-link" href="/TogetherPeopleStrong/public/portfolio/viewAll">Portfolios</a>
 					</li>
+                    <li class="nav-item bg-tan">
+                    	<div>
+                            <a class="nav-item bg-tan" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form class="nav-item bg-tan" id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+					<li class="nav-item bg-tan">
+                        <a  class="nav-link " href="#" role="button">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                    </li>
                 @endguest
             </ul>
         </div>

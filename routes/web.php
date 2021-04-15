@@ -49,3 +49,10 @@ Route::post('/portfolio/viewPortfolio', 'PortfolioController@viewPortfolio');
 
 Route::post('/userInfo', 'PortfolioController@update');
 
+Route::get('/addAffinity', function(){return view('affinityAdd');});
+Route::post('/checkAffinity', 'UserController@checkAffinity');
+Route::post('/addThisAffinity', 'UserController@addThisAffinity');
+Route::post('/viewAffinity', 'UserController@viewAffinity');
+
+Route::resource('/rest/users', 'RestController@users');
+
