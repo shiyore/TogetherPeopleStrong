@@ -68,3 +68,13 @@ Route::get('/rest/jobs/all', 'RestController@postings');
 Route::get('/rest/jobs/name/{name}', 'RestController@postingsByName');
 Route::get('/rest/jobs/id/{id}', 'RestController@postingsById');
 
+//Routing for job postings
+Route::get('/job_postings',function(){
+    $service = new SecurityService();
+    $postings = $service->getPostings();
+    return view('viewPostings')->with('postings',$postings);
+});
+Route::get('/view_posting/{id}','UserLevelController@viewPosting');
+Route::post('/apply','UserLevelController@addApplication');
+Route::post('/search','UserLevelController@searchPostings');
+

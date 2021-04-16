@@ -15,7 +15,7 @@
 <body>
 
         <section class="contact-clean">
-        <form action="/TogetherPeopleStrong/public/admin/submit_new_posting" method="POST">
+        <form action="/TogetherPeopleStrong/admin/submit_new_posting" method="POST">
             {{csrf_field()}}
             <h2 class="text-center">New Job Posting</h2>
             <div class="form-group"><input class="form-control" type="text" id="posting_title" name="posting_title" placeholder="Title of the Job Posting"></div><br/>

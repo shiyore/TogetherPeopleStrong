@@ -58,5 +58,23 @@ class SecurityService{
         $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
         return $this->verifyCred->getPostingsByName($name);
     }
+    
+    //adds a user to an application
+    public function addApplication($user_id , $posting_id){
+        $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
+        $this->verifyCred->apply($user_id, $posting_id);
+    }
+    
+    //checks if a user ass already applied
+    public function checkApplied($user_id, $posting_id){
+        $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
+        return $this->verifyCred->check_applied($user_id, $posting_id);
+    }
+    
+    //searches for postings
+    public function search_postings($search){
+        $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
+        return $this->verifyCred->search_postings($search);
+    }
 }
 ?>
