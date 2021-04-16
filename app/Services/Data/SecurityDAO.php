@@ -125,7 +125,7 @@ class SecurityDAO{
     public function deletePosting($id){
         try{
             
-            $query = "DELETE FROM `postings` WHERE id='$id'";
+            $query = "DELETE FROM `postings` WHERE id=$id";
             
             $result = mysqli_query($this->conn , $query);
         }catch(Exception $e){

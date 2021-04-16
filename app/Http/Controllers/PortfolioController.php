@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Services\Businesses\SecurityService;
 use App\Models\AdminModel;
 use App\Models\UserModel;
@@ -19,7 +20,6 @@ class PortfolioController extends Controller
         $service = new PortfolioService();
         
         $exists = $service->checkPortfolio($portfolio);
-        $arr = [request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'), request()->get('bio')];
         
         if ($exists)
         {
@@ -40,6 +40,36 @@ class PortfolioController extends Controller
             }
         }
         return view('portfolio_failure');
+    }
+    
+    public function loadPortfolioScreen(Request $request)
+    {
+        $serv = new PortfolioService();
+        $exists = $serv->doesUserHavePortfolio(Auth::id());
+        if ($exists)
+        {
+            $port = $serv->getPortfolioByUid(Auth::id());
+            return view('User_Information')->with(["portfolio" => $port, "exists"=> $exists]);
+        }
+        else 
+        {
+            return view('User_Information')->with('exists', $exists);
+        }
+    }
+    
+    public function viewMyPortfolio(Request $request)
+    {
+        $serv = new PortfolioService();
+        $exists = $serv->doesUserHavePortfolio(Auth::id());
+        if ($exists)
+        {
+            $portfolio = $serv->getPortfolioByUid(Auth::id());
+            return view('portfolioView')->with('portfolio', $portfolio);
+        }
+        else
+        {
+            return view('User_Information')->with('exists', $exists);
+        }
     }
     
     public function viewAll(Request $request)

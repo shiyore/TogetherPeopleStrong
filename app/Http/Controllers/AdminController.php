@@ -36,7 +36,7 @@ class AdminController extends Controller
         //setup data validation rules for login form
         $rules = ['posting_title'=> 'Required | Between: 4, 15 ',
             'skills'=> 'Required | Between: 4, 60',
-            'description'=> 'Required | Between: 20, 100'];
+            'description'=> 'Required | Between: 20, 500'];
         $this->validate($request,$rules);
     }
     

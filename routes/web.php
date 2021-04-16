@@ -46,12 +46,13 @@ Route::post('/admin/manageAffinity', 'AdminController@manageAffinity');
 Route::post('/manageUser','AdminController@manageUser');
 
 
-Route::get('/portfolio/create', function(){return view('User_Information');});
+Route::get('/portfolio/create', 'PortfolioController@loadPortfolioScreen');
 Route::get('/portfolio/viewAll', 'PortfolioController@viewAll');
 Route::get('/TogetherPeopleStrong/portfolio/viewAll', 'PortfolioController@viewAll');
 Route::post('/portfolio/viewPortfolio', 'PortfolioController@viewPortfolio');
 
-Route::post('/userInfo', 'PortfolioController@update');
+Route::post('/portfolio/userInfo', 'PortfolioController@update');
+Route::get('/portfolio/mine', 'PortfolioController@viewMyPortfolio');
 
 Route::get('affinities', 'UserController@getAllAffinities');
 Route::get('/addAffinity', function(){return view('affinityAdd');});

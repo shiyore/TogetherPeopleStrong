@@ -21,12 +21,12 @@
     		</div>
             <div class="d-flex justify-content-end navbar-text actions">
 <!--                 <span class="navbar-text actions"> -->
-                        <a class="nav-item" href="{{ route('logout') }}"
+                        <a class="nav-item btn btn-secondary" href="{{ route('logout') }}"
                            	onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                    <a  class="nav-link " href="#" role="button">
+                    <a  class="nav-link btn btn-light" href="/TogetherPeopleStrong/portfolio/mine" role="button">
                         {{ Auth::user()->name }} 
                     </a>
 <!--             	</span> -->

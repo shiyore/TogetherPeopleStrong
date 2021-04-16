@@ -33,4 +33,14 @@ class PortfolioService
         $DAO = new PortfolioDAO(new DBConnect("togetherpeoplestrong"));
         return $DAO->getPortfolioByName($name);
     }
+    public function doesUserHavePortfolio(int $uid)
+    {
+        $DAO = new PortfolioDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->doesUserHavePortfolio($uid);
+    }
+    public function getPortfolioByUid(int $uid)
+    {
+        $DAO = new PortfolioDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->getPortfolioByUid($uid);
+    }
 }

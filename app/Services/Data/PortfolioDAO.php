@@ -3,6 +3,7 @@ namespace App\Services\Data;
 use App\Models\PortfolioModel;
 use App\Models\UserModel;
 use Carbon\Exceptions\Exception;
+use Illuminate\Support\Facades\Auth;
 
 class PortfolioDAO
 {
@@ -17,6 +18,41 @@ class PortfolioDAO
         else {
             echo "Connected.";
         }*/
+    }
+    
+    public function doesUserHavePortfolio(int $uid)
+    {
+        $query = "SELECT * FROM portfolios WHERE userID = $uid";
+        
+        $result = mysqli_query($this->conn , $query);
+        if(mysqli_num_rows($result) > 0){
+            mysqli_free_result($result);
+            mysqli_close($this->conn);
+            return true;
+        }else{
+            mysqli_free_result($result);
+            mysqli_close($this->conn);
+            return false;
+        }
+    }
+    
+    public function getPortfolioByUid(int $uid)
+    {
+        try
+        {
+            $query = "SELECT * FROM portfolios WHERE userID = $uid";
+            $portfolio;
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc())
+            {
+                $portfolio = new PortfolioModel($row['username'], $row['position'], $row['experience'], $row['proficiencies'], $row['bio']);
+            }
+            return $portfolio;
+        }
+        catch (Exception $e)
+        {
+            
+        }
     }
     
     public function checkPortfolio(PortfolioModel $port)
@@ -47,7 +83,8 @@ class PortfolioDAO
     {
         try
         {
-            $query = "UPDATE portfolios SET position = '{$port->getPosition()}', experience = '{$port->getExperience()}', proficiencies = '{$port->getProficiencies()}', bio = '{$port->getBio()}' WHERE username = '{$port->getName()}'";
+            $id = Auth::id();
+            $query = "UPDATE portfolios SET position = '{$port->getPosition()}', experience = '{$port->getExperience()}', proficiencies = '{$port->getProficiencies()}', bio = '{$port->getBio()}' WHERE userID = '{$id}'";
             if ($result = mysqli_query($this->conn, $query))
             {
               return true;
@@ -67,16 +104,18 @@ class PortfolioDAO
     {
         try
         {
-            $query = "INSERT INTO `portfolios` (`portfolioID`, `username`, `position`, `experience`, `proficiencies`, `bio`) VALUES (NULL, '{$port->getName()}', '{$port->getPosition()}', '{$port->getExperience()}', '{$port->getProficiencies()}', '{$port->getBio()}')";
-                      
-            if ($result = mysqli_query($this->conn, $query))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            $id = Auth::id();
+            $query = "INSERT INTO `portfolios` (`username`, `position`, `experience`, `proficiencies`, `bio`, `userID`) VALUES ('{$port->getName()}', '{$port->getPosition()}', '{$port->getExperience()}', '{$port->getProficiencies()}', '{$port->getBio()}', '{$id}')";
+            return mysqli_query($this->conn, $query);
+            
+//             if (mysqli_query($this->conn, $query))
+//             {
+//                 return true;
+//             }
+//             else
+//             {
+//                 return false;
+//             }
         }
         catch (Exception $e)
         {
