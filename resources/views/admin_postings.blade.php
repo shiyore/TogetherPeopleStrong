@@ -23,7 +23,7 @@
             <tbody>
                 @foreach($postings as $posting)
                     <tr>
-                    	<form action="/TogetherPeopleStrong/public/admin/managePosting" method="post">
+                    	<form action="/TogetherPeopleStrong/admin/managePosting" method="post">
         					{{csrf_field()}}
                     		<td>{{$posting->getTitle()}}
                     		</td>

@@ -21,7 +21,7 @@
         </div>
     </nav>
         <section class="contact-clean">
-        <form action="/TogetherPeopleStrong/public/admin/updatePosting" method="POST">
+        <form action="/TogetherPeopleStrong/admin/updatePosting" method="POST">
             {{csrf_field()}}
             <input type="hidden" id="id" name="id" value="{{$posting[0]->getId()}}">
             <h2 class="text-center">Editing Job Posting</h2>

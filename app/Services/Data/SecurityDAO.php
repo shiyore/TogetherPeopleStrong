@@ -132,5 +132,51 @@ class SecurityDAO{
             echo $e->getMessage();
         }
     }
+    
+    //applying for a job
+    public function apply(int $user_id, int $posting_id){
+        try{
+            $query = "INSERT INTO `applications`(`user_id`, `posting_id`) VALUES ($user_id,$posting_id)";
+            
+            $result = mysqli_query($this->conn , $query);
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    //checking if applied
+    public function check_applied($user_id,$posting_id){
+        try{
+            $query = "SELECT * from `applications` WHERE user_id=$user_id AND posting_id=$posting_id ";
+            
+            $result = mysqli_query($this->conn , $query);
+            if(mysqli_num_rows($result) > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    public function search_postings($search){
+        try{
+            //users array
+            $postings = array();
+            
+            $query = "SELECT id, title, description, skills FROM postings WHERE title LIKE '%$search%' OR description LIKE '%$search%' OR skills LIKE '%$search%'";
+            
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc()) {
+                array_push($postings, new Posting($row['id'],$row['title'],$row['description'],$row['skills']));
+            }
+            return $postings;
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
+    
+    
 }
 ?>

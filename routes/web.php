@@ -56,3 +56,13 @@ Route::post('/viewAffinity', 'UserController@viewAffinity');
 
 Route::resource('/rest/users', 'RestController@users');
 
+//Routing for job postings
+Route::get('/job_postings',function(){
+    $service = new SecurityService();
+    $postings = $service->getPostings();
+    return view('viewPostings')->with('postings',$postings);
+});
+Route::get('/view_posting/{id}','UserLevelController@viewPosting');
+Route::post('/apply','UserLevelController@addApplication');
+Route::post('/search','UserLevelController@searchPostings');
+

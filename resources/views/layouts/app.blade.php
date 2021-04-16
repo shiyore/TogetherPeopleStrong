@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
 	<br/>
@@ -29,7 +30,25 @@
             @yield('content')
         </main>
     </div>
+    <div style="padding-left: 50px;" align="left">
+    <main class="py-4">
+    	@yield('non-center-content')
+    </main>
+    </div>
     </div>
     @include('layouts.footer')
+    
+    <div class="container">
+  <div class="row">
+    <div class="col-4">
+    </div>
+    <div style=""class=" col-4 shadow-lg p-3 mb-5 bg-body rounded-pill" >
+		
+    </div>
+    <div class="col-4">
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
