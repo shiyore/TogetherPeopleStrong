@@ -1,8 +1,10 @@
-<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+<nav style="background-color: white;"class="navbar navbar-light navbar-expand-md navigation-clean-button border border-dark">
     <div class="container"><a class="navbar-brand" href="{{ url('/home') }}">
+	<img style="height:50px; width:100px; margin-right:25px;" alt="TogetherPeopleStrong" src="/TogetherPeopleStrong/resources/img/logo.png">
     {{ config('Together People Strong', 'Together People Strong') }}
     </a>
         <div class="collapse navbar-collapse" id="navcol-1">
+        </div>
         	<div class="d-flex justify-content-start">
                 <ul class="navbar-nav mr-auto">
                 	@guest
@@ -14,7 +16,7 @@
                         <li class="nav-item"><a class="nav-link active" href="/TogetherPeopleStrong/portfolio/create">Manage Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="/TogetherPeopleStrong/portfolio/viewAll">Portfolios</a></li>
                         <li class="nav-item"><a class="nav-link" href="/TogetherPeopleStrong/affinities">Affinity Groups</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#GET THIS ONE">Jobs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/TogetherPeopleStrong/job_postings">Jobs</a></li>
         		</ul>
     		</div>
             <div class="d-flex justify-content-end navbar-text actions">

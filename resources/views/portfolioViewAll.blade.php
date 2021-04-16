@@ -15,13 +15,13 @@
     		<form action="viewPortfolio" method="POST">
     		{{csrf_field()}}
         		<div class="card">
-        		{{$loop->index}}
         		<img src="/TogetherPeopleStrong/resources/img/monke{{($loop->index % 5) + 1}}.jpg" class="card-img-top w-100 d-block" style="height: 200px">
                 	<div class="card-body">
                         <h4 class="card-title">{{$portfolio->getName()}}</h4><input type="hidden" id="name" name="name" value="{{$portfolio->getName()}}">
                         <p class="card-text">Last held postiton: {{$portfolio->getPosition()}}</p><input type="hidden" id="position" name="position" value="{{$portfolio->getPosition()}}">
                         <input type="hidden" id="experience" name="experience" value="{{$portfolio->getExperience()}}">
             			<input type="hidden" id="proficiencies" name="proficiencies" value="{{$portfolio->getProficiencies()}}">
+            			<input type="hidden" id="bio" name="bio" value="{{$portfolio->getBio()}}">
                         <button class="btn btn-primary btn-banana" type="submit">View Portfolio</button>
             		</div>
         		</div>

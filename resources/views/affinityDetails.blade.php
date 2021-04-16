@@ -10,28 +10,25 @@
 <body>
 	<h1>{{$affinity->getTitle()}} Group</h1>
 <div>
-<table class="table" style="width:100%">
-    <thead class="thead-dark">
-        <tr>
-        <th scope="col">Members</th>
-        </tr>
-    </thead>
-    <tbody>
-    	@foreach($users as $user)
-        <tr>
-        <td>{{$user->getName()}}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+	<div class="row">
+        @foreach($users as $user)
+        <div class="col-sm-3">
+            <div class="card" style="margin: 25px 50px;">
+              <div class="card-body" >
+                <h5 class="card-title">{{$user->getName()}}</h5>
+                <br/>
+                <p>{{$user->getEmail()}}</p>
+              </div>
+            </div>
+        </div>
+    @endforeach
+    </div>
 @if(!$joined)
 	<form action="/TogetherPeopleStrong/viewAffinity/addThisAffinity" method="get">
-<!-- 	<input type="hidden" id="id" name="id" value="{{$affinity->getId()}}"> -->
 	<button type="submit" class="btn btn-primary">Join Group</button>
 	</form>
 @else
 	<form action="/TogetherPeopleStrong/viewAffinity/removeThisAffinity" method="get">
-<!-- 	<input type="hidden" id="id" name="id" value="{{$affinity->getId()}}"> -->
 	<button type="submit" class="btn btn-danger">Leave Group</button>
 	</form>
 @endif

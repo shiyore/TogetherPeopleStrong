@@ -14,12 +14,12 @@ class PortfolioController extends Controller
     public function update(Request $request)
     {
         //$user = new UserModel(request()->get('user_name'), request()->get('email'), request()->get('password'));
-        $portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'));
+        $portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'), request()->get('bio'));
         
         $service = new PortfolioService();
         
         $exists = $service->checkPortfolio($portfolio);
-        $arr = [request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies')];
+        $arr = [request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'), request()->get('bio')];
         
         if ($exists)
         {
@@ -51,7 +51,9 @@ class PortfolioController extends Controller
     }
     public function viewPortfolio(Request $request)
     {
-        $portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'));
+        //$portfolio = new PortfolioModel(request()->get('name'), request()->get('position'), request()->get('experience'), request()->get('proficiencies'), request()->get('bio'));
+        $service = new PortfolioService();
+        $portfolio = $service->getPortfolioByName($request->get('name'));
         return view('portfolioView')->with('portfolio', $portfolio);
     }
 }

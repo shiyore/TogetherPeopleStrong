@@ -4,7 +4,8 @@
 <section id="portfolio" class="content-section">
     <div class="container">
         <div class="text-center content-section-heading">
-            <h3 class="text-secondary mb-0">TogetherPeopleStrong</h3>
+            <h1 class="text-secondary mb-0">TogetherPeopleStrong</h1>
+            <br/>
             <h2 class="mb-5">"Apes alone weak. Apes together strong." - Caesar from Rise of the Planet of the Apes</h2>
         </div>
         <div class="row no-gutters">

@@ -15,6 +15,10 @@ class UserDataModel implements \JsonSerializable
     {
         return $this->name;
     }
+    public function getEmail()
+    {
+        return $this->email;
+    }
     public function jsonSerialize()
     {
         return get_object_vars($this);

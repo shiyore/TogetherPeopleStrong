@@ -9,24 +9,19 @@
 @section('content')
 <body>
 <div>
-<table class="table" style="width:100%">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Title</th>
-        <th scope="col">View</th>
-      </tr>
-    </thead>
-    <tbody>
+    <div class="row">
     @foreach($affinities as $affinity)
-        <tr>
-        		<td>{{$affinity->getTitle()}}</td>
-        		<td></td>
-        		<td><a class="btn btn-secondary" href="http://localhost/TogetherPeopleStrong/viewAffinity/{{$affinity->getId()}}">View Group</a></td>
-        	</form>
-        </tr>
+        <div class="col-sm-3">
+            <div class="card" style="margin: 25px 50px;">
+              <div class="card-body">
+                <h5 class="card-title">{{$affinity->getTitle()}}</h5>
+                <br/>
+                <a href="http://localhost/TogetherPeopleStrong/viewAffinity/{{$affinity->getId()}}" class="btn btn-primary">View Group</a>
+              </div>
+            </div>
+        </div>
     @endforeach
-    </tbody>
-</table>
+    </div>
 </div>
 @endsection
 </body>

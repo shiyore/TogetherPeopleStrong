@@ -47,7 +47,7 @@ class PortfolioDAO
     {
         try
         {
-            $query = "UPDATE portfolios SET position = '{$port->getPosition()}', experience = '{$port->getExperience()}', proficiencies = '{$port->getProficiencies()}' WHERE username = '{$port->getName()}'";
+            $query = "UPDATE portfolios SET position = '{$port->getPosition()}', experience = '{$port->getExperience()}', proficiencies = '{$port->getProficiencies()}', bio = '{$port->getBio()}' WHERE username = '{$port->getName()}'";
             if ($result = mysqli_query($this->conn, $query))
             {
               return true;
@@ -67,7 +67,7 @@ class PortfolioDAO
     {
         try
         {
-            $query = "INSERT INTO `portfolios` (`portfolioID`, `username`, `position`, `experience`, `proficiencies`) VALUES (NULL, '{$port->getName()}', '{$port->getPosition()}', '{$port->getExperience()}', '{$port->getProficiencies()}')";
+            $query = "INSERT INTO `portfolios` (`portfolioID`, `username`, `position`, `experience`, `proficiencies`, `bio`) VALUES (NULL, '{$port->getName()}', '{$port->getPosition()}', '{$port->getExperience()}', '{$port->getProficiencies()}', '{$port->getBio()}')";
                       
             if ($result = mysqli_query($this->conn, $query))
             {
@@ -94,9 +94,28 @@ class PortfolioDAO
             $result = mysqli_query($this->conn , $query);
             while($row = $result->fetch_assoc())
             {
-                array_push($portfolios, new PortfolioModel($row['username'], $row['position'], $row['experience'], $row['proficiencies']));
+                array_push($portfolios, new PortfolioModel($row['username'], $row['position'], $row['experience'], $row['proficiencies'], $row['bio']));
             }
             return $portfolios;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
+    
+    public function getPortfolioByName(String $name)
+    {
+        try
+        {
+            $query = "SELECT * FROM `portfolios` WHERE `username` = '$name'";
+            $portfolio;
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc())
+            {
+                $portfolio = new PortfolioModel($row['username'], $row['position'], $row['experience'], $row['proficiencies'], $row['bio']);
+            }
+            return $portfolio;
         }
         catch (Exception $e)
         {
