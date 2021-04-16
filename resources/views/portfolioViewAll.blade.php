@@ -9,30 +9,26 @@
 @section('content')
 <body>
 <div>
-<table class="table" style="width:100%">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Position</th>
-        <th scope="col">View</th>
-      </tr>
-    </thead>
-    <tbody>
+	<div class="row">
     @foreach($portfolios as $portfolio)
-        <tr>
-        	<form action="viewPortfolio" method="POST">
-        		{{csrf_field()}}
-        		<td>{{$portfolio->getName()}}<input type="hidden" id="name" name="name" value="{{$portfolio->getName()}}"></td>
-        		<td>{{$portfolio->getPosition()}}<input type="hidden" id="position" name="position" value="{{$portfolio->getPosition()}}">
-        			<input type="hidden" id="experience" name="experience" value="{{$portfolio->getExperience()}}">
-        			<input type="hidden" id="proficiencies" name="proficiencies" value="{{$portfolio->getProficiencies()}}">
-        		</td>
-        		<td><button type="submit">View</button></td>
-        	</form>
-        </tr>
+		<div class="col-sm-2">
+    		<form action="viewPortfolio" method="POST">
+    		{{csrf_field()}}
+        		<div class="card">
+        		{{$loop->index}}
+        		<img src="/TogetherPeopleStrong/resources/img/monke{{($loop->index % 5) + 1}}.jpg" class="card-img-top w-100 d-block" style="height: 200px">
+                	<div class="card-body">
+                        <h4 class="card-title">{{$portfolio->getName()}}</h4><input type="hidden" id="name" name="name" value="{{$portfolio->getName()}}">
+                        <p class="card-text">Last held postiton: {{$portfolio->getPosition()}}</p><input type="hidden" id="position" name="position" value="{{$portfolio->getPosition()}}">
+                        <input type="hidden" id="experience" name="experience" value="{{$portfolio->getExperience()}}">
+            			<input type="hidden" id="proficiencies" name="proficiencies" value="{{$portfolio->getProficiencies()}}">
+                        <button class="btn btn-primary btn-banana" type="submit">View Portfolio</button>
+            		</div>
+        		</div>
+    		</form>
+		</div>
     @endforeach
-    </tbody>
-</table>
+    </div>
 </div>
 @endsection
 </body>

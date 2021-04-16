@@ -53,6 +53,11 @@ class SecurityService{
         $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
         return $this->verifyCred->deletePosting($id);
     }
+    public function getPostingsByName(String $name)
+    {
+        $this->verifyCred = new SecurityDAO(new DBConnect("togetherpeoplestrong"));
+        return $this->verifyCred->getPostingsByName($name);
+    }
     
     //adds a user to an application
     public function addApplication($user_id , $posting_id){

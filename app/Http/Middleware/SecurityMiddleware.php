@@ -27,7 +27,7 @@ class SecurityMiddleware
         
         //step 2:run the business rules that check the URI that you do not need to secure
         $secure_check = true;
-        if($request->is("admin") || $request->is("login") || $request->is('register') || $request->is('admin_login')){
+        if($request->is("admin") || $request->is("login") || $request->is('register') || $request->is('admin_login') || str_contains($request->url(),"rest")){
             $secure_check = false;
         }else{
             

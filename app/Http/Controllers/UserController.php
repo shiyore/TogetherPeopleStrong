@@ -16,27 +16,49 @@ class UserController
         return view("affinityAdd")->with("affinities", $aff);
     }
     
-    public function addThisAffinity(Request $request)
+    public function addThisAffinity()
     {
         $serv = new UserService();
         $uid = Auth::id();
-        $serv->addThisAffinity($request->get('title'), $uid);
-        return view("affinityAdd");
+        if ($serv->addThisAffinity(session()->get('affId'), $uid))
+        {
+            $affinity = $serv->getAffinity(session()->get('affId'));
+            $users = $serv->getUsersFromAffinity(session()->get('affId'));
+            session()->put('affId', $affinity->getId());
+            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => true]);
+        }
+        return $this->viewAffinity(session()->get('affId'));
+    }
+    
+    public function removeThisAffinity()
+    {
+        $serv = new UserService();
+        $uid = Auth::id();
+        if ($serv->removeThisAffinity(session()->get('affId'), $uid))
+        {
+            $affinity = $serv->getAffinity(session()->get('affId'));
+            $users = $serv->getUsersFromAffinity(session()->get('affId'));
+            session()->put('affId', $affinity->getId());
+            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => false]);
+        }
+        return $this->viewAffinity(session()->get('affId'));
     }
     
     public function getAllAffinities(Request $request)
     {
         $serv = new UserService();
         $aff = $serv->getAllAffinities();
-        return view("affinityView")->with($affinities, $aff);
+        return view("affinityView")->with("affinities", $aff);
     }
     
-    public function viewAffinity(Request $request)
+    public function viewAffinity($id)
     {
-        $affinity = new AffinityModel($request->get('id'), $request->get('title'));
         $serv = new UserService();
-        $users = $serv->getAffinityUsers($request->get('id'));
-        return view("affinityDetails")->with("users", $users);
+        $affinity = $serv->getAffinity($id);
+        $joined = $serv->checkIfJoined($id);
+        $users = $serv->getUsersFromAffinity($id);
+        session()->put('affId', $affinity->getId());
+        return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => $joined]);
     }
 }
 

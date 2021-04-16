@@ -8,6 +8,7 @@
 </head>
 @section('content')
 <body>
+	<h1>{{$affinity->getTitle()}} Group</h1>
 <div>
 <table class="table" style="width:100%">
     <thead class="thead-dark">
@@ -18,19 +19,22 @@
     <tbody>
     	@foreach($users as $user)
         <tr>
-        <td>{{$user}}</td>
+        <td>{{$user->getName()}}</td>
         </tr>
+        @endforeach
     </tbody>
 </table>
-@if(user is not joined)
-	<form action="addThisAffinity" method="post">
-	<input type="hidden" id="title" name="title" value="{{$title}}">
+@if(!$joined)
+	<form action="/TogetherPeopleStrong/viewAffinity/addThisAffinity" method="get">
+<!-- 	<input type="hidden" id="id" name="id" value="{{$affinity->getId()}}"> -->
 	<button type="submit" class="btn btn-primary">Join Group</button>
 	</form>
 @else
-	<form action="removeThisAffinity" method="post">
-	<input type="hidden" id="title" name="title" value="{{$title}}">
+	<form action="/TogetherPeopleStrong/viewAffinity/removeThisAffinity" method="get">
+<!-- 	<input type="hidden" id="id" name="id" value="{{$affinity->getId()}}"> -->
 	<button type="submit" class="btn btn-danger">Leave Group</button>
 	</form>
+@endif
 </div>
 </body>
+@endsection
