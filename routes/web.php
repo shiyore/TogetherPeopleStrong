@@ -39,6 +39,10 @@ Route::post('/admin/managePosting','AdminController@changePosting');
 Route::post('/admin/updatePosting','AdminController@updatePosting');
 Route::post('/admin/deleteConfirmed','AdminController@deleteConfirmation');
 
+Route::get('/admin/affinities', 'AdminController@adminAffinities');
+Route::post('/admin/updateAffinity', 'AdminController@updateAffinity');
+Route::post('/admin/manageAffinity', 'AdminController@manageAffinity');
+
 Route::post('/manageUser','AdminController@manageUser');
 
 
@@ -49,10 +53,18 @@ Route::post('/portfolio/viewPortfolio', 'PortfolioController@viewPortfolio');
 
 Route::post('/userInfo', 'PortfolioController@update');
 
+Route::get('affinities', 'UserController@getAllAffinities');
 Route::get('/addAffinity', function(){return view('affinityAdd');});
 Route::post('/checkAffinity', 'UserController@checkAffinity');
-Route::post('/addThisAffinity', 'UserController@addThisAffinity');
-Route::post('/viewAffinity', 'UserController@viewAffinity');
+Route::get('/viewAffinity/addThisAffinity', 'UserController@addThisAffinity');
+Route::get('/viewAffinity/removeThisAffinity', 'UserController@removeThisAffinity');
+// Route::post('/viewAffinity', 'UserController@viewAffinity');
+Route::get('/viewAffinity/{id}', 'UserController@viewAffinity');
 
-Route::resource('/rest/users', 'RestController@users');
+Route::get('/rest/users', 'RestController@users');
+Route::get('/rest/user/{id}', 'RestController@getUser');
+Route::get('/rest/users/affinity/{id}', 'RestController@getUsersFromAffinity');
+Route::get('/rest/jobs/all', 'RestController@postings');
+Route::get('/rest/jobs/name/{name}', 'RestController@postingsByName');
+Route::get('/rest/jobs/id/{id}', 'RestController@postingsById');
 

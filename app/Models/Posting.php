@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Posting
+class Posting implements \JsonSerializable
 {
     private $id;
     private $title;
@@ -69,6 +69,11 @@ class Posting
     {
         return $this->id;
     }
+    public function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
         
     
 }

@@ -1,54 +1,38 @@
-<nav class="navbar navbar-expand-md navbar-light bg-green shadow-sm nav-top">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('Together People Strong', 'Together People Strong') }}
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-
-            </ul>
-
-            <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Authentication Links -->
-                 @guest
-                    <li class="nav-item bg-tan">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+    <div class="container"><a class="navbar-brand" href="{{ url('/home') }}">
+    {{ config('Together People Strong', 'Together People Strong') }}
+    </a>
+        <div class="collapse navbar-collapse" id="navcol-1">
+        	<div class="d-flex justify-content-start">
+                <ul class="navbar-nav mr-auto">
+                	@guest
+                    	<li class="nav-item"><a class="login btn btn-secondary" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     @if (Route::has('register'))
-                        <li class="nav-item bg-tan">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                    	<li class="nav-item"><a class="btn btn-light action-button" role="button" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                     @endif
-                @else
-					<li class="nav-item bg-tan">
-						<a class="nav-link" href="/TogetherPeopleStrong/public/portfolio/viewAll">Portfolios</a>
-					</li>
-                    <li class="nav-item bg-tan">
-                    	<div>
-                            <a class="nav-item bg-tan" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form class="nav-item bg-tan" id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-					<li class="nav-item bg-tan">
-                        <a  class="nav-link " href="#" role="button">
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                    @else
+                        <li class="nav-item"><a class="nav-link active" href="/TogetherPeopleStrong/portfolio/create">Manage Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/TogetherPeopleStrong/portfolio/viewAll">Portfolios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/TogetherPeopleStrong/affinities">Affinity Groups</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#GET THIS ONE">Jobs</a></li>
+        		</ul>
+    		</div>
+            <div class="d-flex justify-content-end navbar-text actions">
+<!--                 <span class="navbar-text actions"> -->
+                        <a class="nav-item" href="{{ route('logout') }}"
+                           	onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
                         </a>
-                    </li>
-                @endguest
-            </ul>
+                    <a  class="nav-link " href="#" role="button">
+                        {{ Auth::user()->name }} 
+                    </a>
+<!--             	</span> -->
+        	</div>
+            @endguest
         </div>
     </div>
+    <form class="nav-item" id="logout-form" action="{{ route('logout') }}" method="POST">
+        @csrf
+    </form>
 </nav>

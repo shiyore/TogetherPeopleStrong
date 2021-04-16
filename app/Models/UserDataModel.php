@@ -3,21 +3,21 @@ namespace App\Models;
 
 class UserDataModel implements \JsonSerializable
 {
-    private $firstName;
-    private $lastName;
+    private $name;
     private $email;
-    private $phoneNum;
     
-    public function __construct($f, $l, $e, $p)
+    public function __construct($f, $e)
     {
-        $this->firstName = $f;
-        $this->lastName = $l;
+        $this->name = $f;
         $this->email = $e;
-        $this->phoneNum = $p;
+    }
+    public function getName()
+    {
+        return $this->name;
     }
     public function jsonSerialize()
     {
-        
+        return get_object_vars($this);
     }
 
 }

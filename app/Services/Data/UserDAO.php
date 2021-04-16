@@ -6,6 +6,7 @@ use League\Flysystem\Exception;
 use App\Models\AffinityModel;
 use App\User;
 use App\Models\UserDataModel;
+use PDO;
 
 class UserDAO
 {
@@ -24,12 +25,52 @@ class UserDAO
             $users = array();
             while($row = $result->fetch_assoc())
             {
-                array_push($users, new UserDataModel($username, $email, $password));
+                array_push($users, new UserDataModel($row['name'], $row['email']));
             }
+            return $users;
         }
         catch (Exception $e)
         {
             
+        }
+    }
+    
+    public function getUser(int $id)
+    {
+        try
+        {
+            $user = array();
+            
+            $query = "SELECT * FROM users WHERE id=$id";
+            
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc()) {
+                array_push($user, new UserDataModel($row['name'],$row['email']));
+            }
+            return $user;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
+    
+    public function getUsersFromAffinity(int $id)
+    {
+        try
+        {
+            $stmt = "SELECT * FROM users INNER JOIN affinity_tags ON affinity_tags.affinityID = $id AND affinity_tags.userID = users.id";
+            $result = mysqli_query($this->conn, $stmt);
+            $users = array();
+            while($row = $result->fetch_assoc())
+            {
+                array_push($users, new UserDataModel($row['name'], $row['email']));
+            }
+            return $users;
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
         }
     }
     
@@ -52,6 +93,42 @@ class UserDAO
         }
     }
     
+    public function getAffinity($id)
+    {
+        try
+        {
+            $stmt = "SELECT * FROM affinities WHERE id = $id";
+            $aff;
+            $result = mysqli_query($this->conn , $stmt);
+            while($row = $result->fetch_assoc())
+            {
+                $aff = new AffinityModel((int)$row['ID'], $row['title']);
+            }
+            return $aff;
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+    
+    public function checkIfJoined($id, $uid)
+    {
+        try
+        {
+            $stmt = "SELECT * FROM affinity_tags WHERE affinityID = $id AND userID = $uid";
+            $result = mysqli_query($this->conn, $stmt);
+            if ($result->num_rows > 0)
+                return true;
+            else
+                return false;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
+    
     public function getAllAffinities()
     {
         try
@@ -61,7 +138,7 @@ class UserDAO
             $result = mysqli_query($this->conn, $stmt);
             while($row = $result->fetch_assoc())
             {
-                array_push($aff, (new AffinityModel($row['id'], $row['title'])));
+                array_push($aff, (new AffinityModel($row['ID'], $row['title'])));
             }
             return $aff;
         }
@@ -82,19 +159,13 @@ class UserDAO
         }
     }
     
-    public function addThisAffinity(string $key, int $uid)
+    public function addThisAffinity(int $id, int $uid)
     {
         try
         {
-            $affIdStmt = "SELECT ID from affinities WHERE title = $key";
-            $result = mysqli_query($this->conn, $affIdStmt);
-            $affId = getAffinityId($key);
-            $stmt = "INSERT INTO affinity_tags (affinityID, userID) VALUES ($affId, $uid)";
+            $stmt = "INSERT INTO affinity_tags (affinityID, userID) VALUES ($id, $uid)";
             $result = mysqli_query($this->conn, $stmt);
-            if ($result->num_rows() > 0)
-                return true;
-            else
-                return false;
+            return $result;
         }
         catch (Exception $e)
         {
@@ -102,20 +173,61 @@ class UserDAO
         }
     }
     
-    public function getAffinityUsers(int $id)
+    public function removeThisAffinity(int $id, int $uid)
     {
         try
         {
-            $stmt = "SELECT name FROM users INNER JOIN affinity_tags ON affinity_tags.affinityID = $id AND affinity_tags.userID = users.id";
+            $stmt = "DELETE FROM affinity_tags WHERE affinityID = $id AND userID = $uid";
             $result = mysqli_query($this->conn, $stmt);
-            while($row = $result->fetch_assoc())
-            {
-                array_push($users, $row['name']);
-            }
+            return $result;
         }
         catch (Exception $e)
         {
+            echo $e->getMessage();
+        }
+    }
+    
+    public function createAffinity(string $title)
+    {
+        try
+        {
+            $query = "INSERT INTO `affinities`(`title`) VALUES ('$title')";
             
+            $result = mysqli_query($this->conn , $query);
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+    
+    public function deleteAffinity($id)
+    {
+        try
+        {
+            
+            $query = "DELETE `affinities`, `affinity_tags` FROM `affinities` INNER JOIN `affinity_tags` ON `affinities`.`ID` = `affinity_tags`.`affinityID` WHERE `affinities`.`ID`=$id";
+            
+            $result = mysqli_query($this->conn , $query);
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+    
+    public function updateAffinity($affinity)
+    {
+        try
+        {
+            $title = $affinity->getTitle();
+            $query = "UPDATE `affinities` SET `title`='$title' WHERE `id`='".$affinity->getId()."'";
+            
+            $result = mysqli_query($this->conn , $query);
+        }
+        catch(Exception $e)
+        {
+            echo $e->getMessage();
         }
     }
 }

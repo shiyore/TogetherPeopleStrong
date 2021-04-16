@@ -132,5 +132,23 @@ class SecurityDAO{
             echo $e->getMessage();
         }
     }
+    public function getPostingsByName($name)
+    {
+        try
+        {
+            $postings = array();
+            $stmt = "SELECT id, title, description, skills FROM postings WHERE title LIKE '%$name%'";
+            
+            $result = mysqli_query($this->conn , $stmt);
+            while($row = $result->fetch_assoc()) {
+                array_push($postings, new Posting($row['id'],$row['title'],$row['description'],$row['skills']));
+            }
+            return $postings;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
 }
 ?>

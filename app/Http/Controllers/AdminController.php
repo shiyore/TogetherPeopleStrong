@@ -6,9 +6,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Services\Businesses\SecurityService;
+use App\Services\Businesses\UserService;
 use App\Models\AdminModel;
 use App\Models\UserModel;
 use App\Models\Posting;
+use App\Models\AffinityModel;
 
 class AdminController extends Controller
 {
@@ -125,6 +127,65 @@ class AdminController extends Controller
     {
         $serv = new SecurityService();
         return view('AdminPortal')->with('users', $serv->getUsers());
+    }
+    
+    public function manageAffinity(Request $request)
+    {
+        if($request->exists("delete_button")){
+            return $this->deleteAffinity($request);
+        }
+        //if the delete button is pressed, the code below is run
+        else{
+            return $this->editAffinityRedirect($request);
+        }
+    }
+    
+    public function deleteAffinity(Request $request)
+    {
+        $id = $request->get('id');
+        $serv = new UserService();
+        $serv->deleteAffinity($id);
+        
+        $affinities = $serv->getAllAffinities();
+        return view('admin_affinities')->with('affinities', $affinities);
+    }
+    
+    public function editAffinityRedirect(Request $request)
+    {
+        $id = $request->get('id');
+        
+        //getting the posting from the ID
+        $serv = new UserService();
+        $affinity = $serv->getAffinity($id);
+        
+        return view('edit_affinity')->with('affinity',$affinity);
+    }
+    
+    public function updateAffinity(Request $request)
+    {
+        $affinity = new AffinityModel($request->get('id'), $request->get('title'));
+        $serv = new UserService();
+        $serv->updateAffinity($affinity);
+        
+        return $this->adminAffinities();
+    }
+    
+    public function createAffinity (Request $request)
+    {
+        $title = $request->get('title');
+        
+        $serv = new UserService();
+        $serv->createAffinity($title);
+        $affinities = $serv->getAllAffinities();
+        
+        return view('admin_affinities')->with('affinities', $affinities);
+    }
+    
+    public function adminAffinities()
+    {
+        $serv = new UserService();
+        $affinities = $serv->getAllAffinities();
+        return view('admin_affinities')->with('affinities', $affinities);
     }
     
 }

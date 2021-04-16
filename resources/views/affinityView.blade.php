@@ -13,17 +13,15 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col">Title</th>
+        <th scope="col">View</th>
       </tr>
     </thead>
     <tbody>
     @foreach($affinities as $affinity)
         <tr>
-        	<form action="viewAffinity" method="POST">
-        		{{csrf_field()}}
-        		<td>{{$affinity->getTitle()}}<input type="hidden" id="name" name="name" value="{{$affinity->getTitle()}}"></td>
-        		<td><input type="hidden" id="id" name="id" value="{{$affinity->getId()}}">
-        		</td>
-        		<td><button type="submit">View</button></td>
+        		<td>{{$affinity->getTitle()}}</td>
+        		<td></td>
+        		<td><a class="btn btn-secondary" href="http://localhost/TogetherPeopleStrong/viewAffinity/{{$affinity->getId()}}">View Group</a></td>
         	</form>
         </tr>
     @endforeach

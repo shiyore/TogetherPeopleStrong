@@ -3,6 +3,8 @@ namespace App\Services\Businesses;
 
 use App\Services\Data\UserDAO;
 use App\Services\Data\DBConnect;
+use Illuminate\Support\Facades\Auth;
+use App\Models\AffinityModel;
 
 class UserService
 {
@@ -12,16 +14,44 @@ class UserService
         return $DAO->getAllUsers();
     }
     
+    public function getUser(int $id)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->getUser($id);
+    }
+    
+    public function getUsersFromAffinity(int $id)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->getUsersFromAffinity($id);
+    }
+    
     public function checkAffinity($key)
     {
         $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
         return $DAO->checkAffinity($key);
     }
     
-    public function addThisAffinity($key, $uid)
+    public function getAffinity($id)
     {
         $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
-        return $DAO->addThisAffinity($key, $uid);
+        return $DAO->getAffinity($id);
+    }
+    public function checkIfJoined($id)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        $uid = Auth::id();
+        return $DAO->checkIfJoined($id,$uid);
+    }
+    public function addThisAffinity($id, $uid)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->addThisAffinity($id, $uid);
+    }
+    public function removeThisAffinity($id, $uid)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->removeThisAffinity($id, $uid);
     }
     
     public function getAllAffinities()
@@ -34,6 +64,24 @@ class UserService
     {
         $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
         return $DAO->getAffinityUsers($id);
+    }
+    
+    public function createAffinity(string $title)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->createAffinity($title);
+    }
+    
+    public function deleteAffinity(int $id)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->deleteAffinity($id);
+    }
+    
+    public function updateAffinity(AffinityModel $affinity)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->updateAffinity($affinity);
     }
 }
 
