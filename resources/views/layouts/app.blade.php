@@ -29,6 +29,7 @@
     </main>
     </div>
     @include('layouts.footer')
+    </div>
     <script src="/TogetherPeopleStrong/bootstrap/assets/js/jquery.min.js"></script>
     <script src="/TogetherPeopleStrong/bootstrap/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>

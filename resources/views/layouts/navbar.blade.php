@@ -26,7 +26,7 @@
                             document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                    <a  class="nav-link btn btn-light" href="/TogetherPeopleStrong/portfolio/mine" role="button">
+                    <a  class="nav-link btn btn-light" href="/TogetherPeopleStrong/editUserInfo" role="button">
                         {{ Auth::user()->name }} 
                     </a>
 <!--             	</span> -->
