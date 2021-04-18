@@ -6,6 +6,7 @@ use League\Flysystem\Exception;
 use App\Models\AffinityModel;
 use App\User;
 use App\Models\UserDataModel;
+use App\Models\UserModel;
 use PDO;
 
 class UserDAO
@@ -53,6 +54,33 @@ class UserDAO
         {
             
         }
+    }
+    
+    public function getUserModel(int $id)
+    {
+        try
+        {
+            $user;
+            
+            $query = "SELECT * FROM users WHERE id=$id";
+            
+            $result = mysqli_query($this->conn , $query);
+            while($row = $result->fetch_assoc()) {
+                $user = new UserModel($row['name'],$row['email'], $row['password'], $row['ssn']);
+            }
+            return $user;
+        }
+        catch (Exception $e)
+        {
+            
+        }
+    }
+    
+    public function addSsn($name, $email, $ssn)
+    {
+        $uid = Auth::id();
+        $query = "UPDATE `users` SET `name` = '$name', `email` = '$email', `ssn` = '$ssn' WHERE `id` = $uid";
+        mysqli_query($this->conn, $query);
     }
     
     public function getUsersFromAffinity(int $id)

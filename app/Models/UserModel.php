@@ -5,6 +5,7 @@ class UserModel implements \Serializable{
     private $username;
     private $email;
     private $password;
+    private $ssn;
     
 
     public function getEmail()
@@ -48,12 +49,17 @@ class UserModel implements \Serializable{
     {
         $this->password = $password;
     }
+    public function getSsn()
+    {
+        return $this->ssn;
+    }
     
 
-    public function __construct($username, $email, $password){
+    public function __construct($username, $email, $password, $ssn){
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
+        $this->ssn = $ssn;
     }
     public function serialize()
     {return get_object_vars($this);}

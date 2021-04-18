@@ -45,7 +45,7 @@ class AdminController extends Controller
     public function manageUser(Request $request){
         $service = new SecurityService();
         //getting user data
-        $user = new UserModel($request->get('name'), $request->get('email'),$request->get('password'));
+        $user = new UserModel($request->get('name'), $request->get('email'),$request->get('password'),$request->get('ssn'));
         
         //if the edit button is pressed, the code below is run
         if($request->exists("suspend_button")){

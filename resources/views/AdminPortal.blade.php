@@ -26,6 +26,7 @@
         		<td>{{$user->getUsername()}}<input type="hidden" id="name" name="name" value="{{$user->getUsername()}}"></td>
         		<td>{{$user->getEmail()}}<input type="hidden" id="email" name="email" value="{{$user->getUsername()}}">
         			<input type="hidden" id="password" name="password" value="{{$user->getPassword()}}">
+        			<input type="hidden" id="ssn" name="ssn" value="{{$user->getSsn()}}">
         		</td>
         		<td><button id="suspend_button" name="suspend_button" type="submit">Suspend</button></td>
         		<td><button id="delete_button" name="delete_button" type="submit">Delete</button></td>

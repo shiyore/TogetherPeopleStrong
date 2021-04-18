@@ -41,11 +41,11 @@ class SecurityDAO{
             //users array
             $users = array();
             
-            $query = "SELECT name , email, password from users";
+            $query = "SELECT name , email, password, ssn from users";
             
             $result = mysqli_query($this->conn , $query);
             while($row = $result->fetch_assoc()) {
-                array_push($users, new UserModel($row['name'],$row['email'],$row['password']));
+                array_push($users, new UserModel($row['name'],$row['email'],$row['password'],$row['ssn']));
             }
             return $users;
         }catch(Exception $e){

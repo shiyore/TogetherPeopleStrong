@@ -53,6 +53,8 @@ Route::post('/portfolio/viewPortfolio', 'PortfolioController@viewPortfolio');
 
 Route::post('/portfolio/userInfo', 'PortfolioController@update');
 Route::get('/portfolio/mine', 'PortfolioController@viewMyPortfolio');
+Route::get('/editUserInfo', 'UserController@editUserInfo');
+Route::post('userInfoUpdate', 'UserController@processUserEdit');
 
 Route::get('affinities', 'UserController@getAllAffinities');
 Route::get('/addAffinity', function(){return view('affinityAdd');});

@@ -20,6 +20,18 @@ class UserService
         return $DAO->getUser($id);
     }
     
+    public function getUserModel(int $id)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->getUserModel($id);
+    }
+    
+    public function addSsn($name, $email, $ssn)
+    {
+        $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
+        return $DAO->addSsn($name, $email, $ssn);
+    }
+    
     public function getUsersFromAffinity(int $id)
     {
         $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));

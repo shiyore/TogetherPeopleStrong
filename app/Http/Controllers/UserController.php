@@ -15,6 +15,26 @@ class UserController
         $aff = $serv->checkAffinity($request->get('affinity'));
         return view("affinityAdd")->with("affinities", $aff);
     }
+    public function editUserInfo(Request $request)
+    {
+        $uid = Auth::id();
+        $serv = new UserService();
+        $user = $serv->getUserModel($uid);
+        if ($user->getSsn() == null || $user->getSsn() == "")
+            $exists = true;
+        else
+            $exists = false;
+        return view("editUserInfo")->with(["user" => $user, "exists" => $exists]);
+    }
+    public function processUserEdit(Request $request)
+    {
+        $serv = new UserService();
+        $email = $request->get('email');
+        $ssn = $request->get('ssn');
+        $name = $request->get('name');
+        $serv->addSsn($name, $email, $ssn);
+        return view("home");
+    }
     
     public function addThisAffinity()
     {
