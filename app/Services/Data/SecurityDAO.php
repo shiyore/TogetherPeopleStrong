@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * @author: Aiden Yoshioka
+ * Module: Admins ver. 2, Job Postings ver. 1 
+ * Date: 04/18/21
+ * Synopsis: This is the Data Access Object for Admins and Job postings. This handles verifying admin login credentials, getting users, suspending them, and deleting them for admin use, as well as 
+ * References: This is referenced by the PortfolioBusiness Service.
+ */
 namespace App\Services\Data;
 use App\Models\AdminModel;
 use App\Models\Posting;

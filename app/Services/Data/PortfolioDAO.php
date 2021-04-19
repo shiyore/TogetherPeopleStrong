@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * @author: Carson Perry
+ * Module: Portfolios ver. 2
+ * Date: 04/18/21
+ * Synopsis: This is the Data Access Object for Portfolios. This gets all portfolios, check if a user has a portfolio already, and gets specific portfolio information based on certain information.
+ * References: This is references the PortfolioBusiness Service.
+ */
 namespace App\Services\Data;
 use App\Models\PortfolioModel;
 use App\Models\UserModel;
@@ -85,7 +93,7 @@ class PortfolioDAO
         {
             $id = Auth::id();
             $query = "UPDATE portfolios SET position = '{$port->getPosition()}', experience = '{$port->getExperience()}', proficiencies = '{$port->getProficiencies()}', bio = '{$port->getBio()}' WHERE userID = '{$id}'";
-            if ($result = mysqli_query($this->conn, $query))
+            if (mysqli_query($this->conn, $query))
             {
               return true;
             }

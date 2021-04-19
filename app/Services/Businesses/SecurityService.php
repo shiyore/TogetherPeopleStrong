@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.5
+ * @author: Aiden Yoshioka
+ * Module: Admin ver. 2 and Postings ver. 2 
+ * Date: 04/18/21
+ * Synopsis: This is the Security service to contact and pass information to the Security Data Access Object.
+ * References: This is references the SecurityDAO and is referenced by the admin controller and the user level controller.
+ */
 namespace App\Services\Businesses;
 
 use App\Models\AdminModel;

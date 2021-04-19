@@ -1,4 +1,11 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * Module: Portfolios ver.2, Job Postings ver. 2
+ * Date: 04/18/21
+ * Synopsis: This is a class taken from parsedown.org to allow markdown parsing for portfolios and job postings to enable more customzation for users.
+ * References: This is referenced by the MarkdownParserService to hold and format parsed markdown information.
+ */
 namespace App\Models;
 #
 #

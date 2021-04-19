@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.6
+ * @author: Carson Perry
+ * Module: RestAPI ver. 1
+ * Date: 04/18/21
+ * Synopsis: This is the business service to contact the portfolioDAO
+ * References: This is references the PortfolioDAO and is referenced by the portfolio controller
+ */
 namespace App\Services\Businesses;
 
 use App\Models\PortfolioModel;

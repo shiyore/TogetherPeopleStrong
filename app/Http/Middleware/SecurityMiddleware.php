@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * Project: TogetherPeopleStrong ver.6
+ * @author: Aiden Yoshioka
+ * Module: Page-Level Security ver. 2
+ * Date: 04/18/21
+ * Synopsis: This handles page level security, making sure that if the user is not logged in and tries to enter pages that aren't login, register, or admin_login, they get taken to the login page for users,
+ *          and the admin login for admins. Later it was added for the rest api to not be affected by this, so the api would work.
+ * References: This is referenced everywhere when a new url is being loaded.
+ */
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;

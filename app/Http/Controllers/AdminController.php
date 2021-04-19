@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * Project: TogetherPeopleStrong ver.5
+ * @author: Aiden Yoshioka
+ * Module: Admin ver. 3 and Job Postings ver. 1
+ * Date: 04/18/21
+ * Synopsis: The controller that deals with admin login, user administration, and job postings administration
+ * References: This references the Admin Business Service for it's business logic.
+ */
 namespace App\Http\Controllers;
 
 

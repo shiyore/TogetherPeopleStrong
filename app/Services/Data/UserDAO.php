@@ -1,4 +1,13 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * @author: Carson Perry
+ * Module: Users ver. 2, Affinities ver. 3
+ * Date: 04/18/21
+ * Synopsis: This is the Data Access Object for Users and Affinity Groups. This gets all users, specific users, all affinity groups, a single affinity group, as well as Create Update and Delete for Affinity groups,
+ *          joining affinity groups, and updating user information.
+ * References: This is referenced by the User Business Service, and references the usermodel, userdatamodel, and affinity model.
+ */
 namespace App\Services\Data;
 
 use Illuminate\Support\Facades\Auth;

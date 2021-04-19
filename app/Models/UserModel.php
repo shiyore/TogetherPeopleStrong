@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.1
+ * @author: Carson Perry
+ * Module: Users ver. 1
+ * Date: 04/18/21
+ * Synopsis: This is the model to hold user information.
+ * References: This is referenced by the User controller and User DAO.
+ */
 namespace App\Models;
 
 class UserModel implements \Serializable{

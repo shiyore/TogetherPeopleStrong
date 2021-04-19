@@ -1,4 +1,13 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * @author: Carson Perry
+ * Module: Affinities ver. 3
+ * Date: 04/18/21
+ * Synopsis: This is the controller that handles both user information, as well as affinity information. This is due to how closely related users and affinity groups are. Affinities went through several revisions
+ *          until it was to a point where we had everything working, and had all the functionality we wanted.
+ * References: This referencesthe affinityModel, but also uses the User model that is return from the UserBusinessService. 
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

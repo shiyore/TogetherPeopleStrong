@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.5
+ * @author: Aiden Yoshioka
+ * Module: Postings ver. 1
+ * Date: 04/18/21
+ * Synopsis: Model to hold Job posting data.
+ * References: This is referenced by the AdminController, UserLevelController, and the Security DAO.
+ */
 namespace App\Models;
 
 class Posting implements \JsonSerializable

@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.2
+ * @author: Aiden Yoshioka
+ * Module: Admins ver. 1
+ * Date: 04/18/21
+ * Synopsis: This is the model used for ensuring an admin is logged in or not.
+ * References: This is referenced by the Security Service, as well as the Security middleware for login.
+ */
 namespace App\Models;
 
 class AdminModel{

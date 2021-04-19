@@ -1,5 +1,11 @@
 <?php
-
+/*
+ * Project: TogetherPeopleStrong ver.6
+ * @author: Carson Perry
+ * Module: RestAPI ver. 1
+ * Date: 04/18/21
+ * Synopsis: Controller for the Rest API, this is where Service calls, retrieval, DTO creation, and data returning is done.
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

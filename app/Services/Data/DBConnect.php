@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.1
+ * @author: Aiden Yoshioka
+ * Module: Data Access ver. 1
+ * Date: 04/18/21
+ * Synopsis: This is the service that creates a mysqli connection to the database.
+ * References: This is referenced by every Business service we have, that sends this connection to their relevant DAO.
+ */
 namespace App\Services\Data;
 use mysqli;
 use Carbon\Exceptions\Exception;

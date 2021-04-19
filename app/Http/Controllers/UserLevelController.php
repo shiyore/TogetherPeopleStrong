@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.5
+ * @author: Aiden Yoshioka
+ * Module: Job Postings ver. 2
+ * Date: 04/18/21
+ * Synopsis: This controller handles the user side of job postings for viewing, searching, and applying to these postings.
+ * References: This references the existing SecurityBusinessService, and uses the User and Posting models that are returned from the service.
+ */
 namespace App\Http\Controllers;
 
 

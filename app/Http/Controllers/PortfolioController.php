@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * Project: TogetherPeopleStrong ver.4
+ * @author: Carson Perry
+ * Module: Portfolios ver. 2
+ * Date: 04/18/21
+ * Synopsis: This is the controller that handles Portfolio routing and information gathering.
+ * References: References the portfolio model and the portfolio business service to load information into models to pass into pages.
+ */
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

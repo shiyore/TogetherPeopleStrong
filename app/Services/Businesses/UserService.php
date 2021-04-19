@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.4
+ * @author: Carson Perry
+ * Module: Affinities ver. 3
+ * Date: 04/18/21
+ * Synopsis: This is the business service to contact the User DAO for affinities and user information.
+ * References: This is references the UserDAO and is referenced by the Users controller.
+ */
 namespace App\Services\Businesses;
 
 use App\Services\Data\UserDAO;

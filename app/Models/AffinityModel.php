@@ -1,4 +1,12 @@
 <?php
+/*
+ * Project: TogetherPeopleStrong ver.7
+ * @author: Carson Perry
+ * Module: Affinities ver.3
+ * Date: 04/18/21
+ * Synopsis: This is the model used to hold Affinity group information. Owner ID had to be added later to make creation, editing, and deletion of groups work.
+ * References: This is referenced by the UserController as well as the UserDAO to hold affinity group information.
+ */
 namespace App\Models;
 
 class AffinityModel
