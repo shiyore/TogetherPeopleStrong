@@ -58,9 +58,12 @@ Route::post('userInfoUpdate', 'UserController@processUserEdit');
 
 Route::get('affinities', 'UserController@getAllAffinities');
 Route::get('/addAffinity', function(){return view('affinityAdd');});
-Route::post('/checkAffinity', 'UserController@checkAffinity');
+Route::post('/createAffinity', 'UserController@createAffinity');
 Route::get('/viewAffinity/addThisAffinity', 'UserController@addThisAffinity');
 Route::get('/viewAffinity/removeThisAffinity', 'UserController@removeThisAffinity');
+Route::get('/viewAffinity/editThisAffinity', 'UserController@editThisAffinity');
+Route::post('viewAffinity/processEditAffinity', 'UserController@processEdit');
+Route::get('viewAffinity/deleteThisAffinity', 'UserController@deleteThisAffinity');
 // Route::post('/viewAffinity', 'UserController@viewAffinity');
 Route::get('/viewAffinity/{id}', 'UserController@viewAffinity');
 

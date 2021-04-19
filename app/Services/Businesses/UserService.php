@@ -78,10 +78,10 @@ class UserService
         return $DAO->getAffinityUsers($id);
     }
     
-    public function createAffinity(string $title)
+    public function createAffinity(string $title, int $uid)
     {
         $DAO = new UserDAO(new DBConnect("togetherpeoplestrong"));
-        return $DAO->createAffinity($title);
+        return $DAO->createAffinity($title, $uid);
     }
     
     public function deleteAffinity(int $id)

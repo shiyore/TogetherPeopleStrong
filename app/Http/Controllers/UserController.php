@@ -9,12 +9,6 @@ use App\Models\AffinityModel;
 
 class UserController
 {
-    public function checkAffinity(Request $request)
-    {
-        $serv = new UserService();
-        $aff = $serv->checkAffinity($request->get('affinity'));
-        return view("affinityAdd")->with("affinities", $aff);
-    }
     public function editUserInfo(Request $request)
     {
         $uid = Auth::id();
@@ -36,6 +30,15 @@ class UserController
         return view("home");
     }
     
+    public function createAffinity(Request $request)
+    {
+        $serv = new UserService();
+        $uid = Auth::id();
+        $serv->createAffinity($request->get('title'), $uid);
+        return $this->getAllAffinities($request);
+    }
+    
+    //Join affinity
     public function addThisAffinity()
     {
         $serv = new UserService();
@@ -45,7 +48,8 @@ class UserController
             $affinity = $serv->getAffinity(session()->get('affId'));
             $users = $serv->getUsersFromAffinity(session()->get('affId'));
             session()->put('affId', $affinity->getId());
-            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => true]);
+            $owner = $affinity->getOwner() == Auth::id();
+            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => true, "owner" => $owner]);
         }
         return $this->viewAffinity(session()->get('affId'));
     }
@@ -59,9 +63,34 @@ class UserController
             $affinity = $serv->getAffinity(session()->get('affId'));
             $users = $serv->getUsersFromAffinity(session()->get('affId'));
             session()->put('affId', $affinity->getId());
-            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => false]);
+            $owner = $affinity->getOwner() == Auth::id();
+            return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => false, "owner" => $owner]);
         }
         return $this->viewAffinity(session()->get('affId'));
+    }
+    
+    public function editThisAffinity()
+    {
+        $serv = new UserService();
+        $aff = $serv->getAffinity(session()->get('affId'));
+        return view("affinityEdit")->with("affinity", $aff);
+    }
+    
+    public function processEdit(Request $request)
+    {
+        $serv = new UserService();
+        $affID = $request->get('id');
+        $title = $request->get('title');
+        $aff = new AffinityModel($affID, $title, Auth::id());
+        $serv->updateAffinity($aff);
+        return $this->getAllAffinities($request);
+    }
+    
+    public function deleteThisAffinity(Request $request)
+    {
+        $serv = new UserService();
+        $serv->deleteAffinity(session()->get('affId'));
+        return $this->getAllAffinities($request);
     }
     
     public function getAllAffinities(Request $request)
@@ -76,9 +105,10 @@ class UserController
         $serv = new UserService();
         $affinity = $serv->getAffinity($id);
         $joined = $serv->checkIfJoined($id);
+        $owner = $affinity->getOwner() == Auth::id();
         $users = $serv->getUsersFromAffinity($id);
         session()->put('affId', $affinity->getId());
-        return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => $joined]);
+        return view("affinityDetails")->with(["users" => $users, "affinity"=> $affinity, "joined" => $joined, "owner" => $owner]);
     }
 }
 

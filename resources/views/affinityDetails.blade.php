@@ -23,15 +23,24 @@
         </div>
     @endforeach
     </div>
-@if(!$joined)
-	<form action="/TogetherPeopleStrong/viewAffinity/addThisAffinity" method="get">
-	<button type="submit" class="btn btn-primary">Join Group</button>
-	</form>
-@else
-	<form action="/TogetherPeopleStrong/viewAffinity/removeThisAffinity" method="get">
-	<button type="submit" class="btn btn-danger">Leave Group</button>
-	</form>
-@endif
+    @if(!$owner)
+        @if(!$joined)
+        	<form action="/TogetherPeopleStrong/viewAffinity/addThisAffinity" method="get">
+        	<button type="submit" class="btn btn-primary">Join Group</button>
+        	</form>
+        @else
+        	<form action="/TogetherPeopleStrong/viewAffinity/removeThisAffinity" method="get">
+        	<button type="submit" class="btn btn-danger">Leave Group</button>
+        	</form>
+        @endif
+    @else
+    	<form action="/TogetherPeopleStrong/viewAffinity/editThisAffinity" method="get">
+        	<button type="submit" class="btn btn-primary">Edit Group</button>
+    	</form>
+    	<form action="/TogetherPeopleStrong/viewAffinity/deleteThisAffinity" method="get">
+        	<button type="submit" class="btn btn-danger">Delete Group</button>
+    	</form>
+	@endif
 </div>
 </body>
 @endsection

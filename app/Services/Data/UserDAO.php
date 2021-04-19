@@ -130,7 +130,7 @@ class UserDAO
             $result = mysqli_query($this->conn , $stmt);
             while($row = $result->fetch_assoc())
             {
-                $aff = new AffinityModel((int)$row['ID'], $row['title']);
+                $aff = new AffinityModel((int)$row['ID'], $row['title'], $row['ownerID']);
             }
             return $aff;
         }
@@ -166,7 +166,7 @@ class UserDAO
             $result = mysqli_query($this->conn, $stmt);
             while($row = $result->fetch_assoc())
             {
-                array_push($aff, (new AffinityModel($row['ID'], $row['title'])));
+                array_push($aff, (new AffinityModel($row['ID'], $row['title'], $row['ownerID'])));
             }
             return $aff;
         }
@@ -215,13 +215,20 @@ class UserDAO
         }
     }
     
-    public function createAffinity(string $title)
+    public function createAffinity(string $title, int $uid)
     {
+        //INSERT INTO `affinities` (`title`, `ownerID`) VALUES ('$title', $uid); SELECT LAST_INSERT_ID()
         try
         {
-            $query = "INSERT INTO `affinities`(`title`) VALUES ('$title')";
-            
+            $query = "INSERT INTO `affinities` (`title`, `ownerID`) VALUES ('$title', $uid)";
             $result = mysqli_query($this->conn , $query);
+            $insertID = mysqli_insert_id($this->conn);
+            
+//             while($row = $result->fetch())
+//             {
+//                 $insertedID = $row['LAST_INSERT_ID()'];
+//             }
+            return $this->addThisAffinity($insertID, $uid);
         }
         catch(Exception $e)
         {
@@ -234,9 +241,9 @@ class UserDAO
         try
         {
             
-            $query = "DELETE `affinities`, `affinity_tags` FROM `affinities` INNER JOIN `affinity_tags` ON `affinities`.`ID` = `affinity_tags`.`affinityID` WHERE `affinities`.`ID`=$id";
+            $query = "DELETE `affinities`, `affinity_tags` FROM `affinities` INNER JOIN `affinity_tags` ON `affinities`.`ID` = `affinity_tags`.`affinityID` WHERE `affinities`.`ID` = $id";
             
-            $result = mysqli_query($this->conn , $query);
+            mysqli_query($this->conn , $query);
         }
         catch(Exception $e)
         {

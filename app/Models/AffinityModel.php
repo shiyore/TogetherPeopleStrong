@@ -5,11 +5,16 @@ class AffinityModel
 {
     private $id;
     private $title;
+    private $ownerID;
     
-    public function __construct(int $id, string $t)
+    public function __construct(int $id, string $t, int $uid)
     {
         $this->id = $id;
         $this->title = $t;
+        if ($uid != null || $uid >0)
+            $this->ownerID = $uid;
+        else
+            $this->ownerID = 0;
     }
     
     public function getTitle()
@@ -27,5 +32,9 @@ class AffinityModel
     public function setId(int $id)
     {
         $this->id = $id;
+    }
+    public function getOwner()
+    {
+        return $this->ownerID;
     }
 }

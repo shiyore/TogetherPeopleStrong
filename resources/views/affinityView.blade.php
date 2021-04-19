@@ -9,6 +9,7 @@
 @section('content')
 <body>
 <div>
+	<a class="btn btn-primary" style="align: center;" href="/TogetherPeopleStrong/addAffinity">Create Affinity</a>
     <div class="row">
     @foreach($affinities as $affinity)
         <div class="col-sm-3">
